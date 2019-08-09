@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+// main
 public class MainActivity extends AppCompatActivity {
     Button bn2;
     Button bn1;

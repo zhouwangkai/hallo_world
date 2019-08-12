@@ -1,8 +1,21 @@
 package com.example.mytianqi;
 
+import android.media.Image;
+
 public class Data {
+    int image;
     private String time;
     private String Temp;
+
+    public int getImage() {
+        return image;
+    }
+
+    public void setImage(int image) {
+        this.image = image;
+    }
+
+
 
     public String getTime() {
         return time;
@@ -20,7 +33,8 @@ public class Data {
         Temp = temp;
     }
 
-    public Data(String time, String temp) {
+    public Data( String time,int image, String temp) {
+        this.image = image;
         this.time = time;
         Temp = temp;
     }

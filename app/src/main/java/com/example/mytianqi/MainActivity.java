@@ -9,11 +9,12 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 // main
 public class MainActivity extends AppCompatActivity {
-    Button bn2;
-    Button bn1;
+    ImageView bn2;
+    ImageView bn1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +23,9 @@ public class MainActivity extends AppCompatActivity {
         bn1 = findViewById(R.id.bn1);
         bn2 = findViewById(R.id.bn2);
         TianQiFragment tianqi = new TianQiFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.r_layout, tianqi).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, tianqi).commit();
         bn1.setOnClickListener(l);
         bn2.setOnClickListener(l);
-
     }
 
     View.OnClickListener l = new View.OnClickListener() {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.bn2:
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.r_layout,f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,f).commit();
         }
 
     };

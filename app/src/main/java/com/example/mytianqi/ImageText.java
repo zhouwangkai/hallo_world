@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class ImageText extends LinearLayout {
     private ImageView mImgView = null;
     private TextView mTextView = null;
+    private TextView textView=null;
     private Context mContext;
 
     public ImageText(Context context, AttributeSet attrs) {
@@ -18,6 +19,7 @@ public class ImageText extends LinearLayout {
         mContext = context;
         mImgView = (ImageView)findViewById(R.id.image);
         mTextView = (TextView)findViewById(R.id.text);
+        textView = (TextView)findViewById(R.id.tishi);
     }
 
     /*设置图片接口*/
@@ -29,8 +31,12 @@ public class ImageText extends LinearLayout {
     public void setText(String str){
         mTextView.setText(str);
     }
+    public void setTextView(String string){
+        textView.setText(string);
+    }
     /*设置文字大小*/
     public void setTextSize(float size){
         mTextView.setTextSize(size);
     }
+
 }

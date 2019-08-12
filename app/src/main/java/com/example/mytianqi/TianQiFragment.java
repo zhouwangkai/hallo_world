@@ -3,6 +3,7 @@ package com.example.mytianqi;
 import android.app.Activity;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.util.Log;
@@ -54,17 +55,16 @@ import static android.view.View.*;
 public class TianQiFragment extends Fragment {
     List<Data> lists;
     String[] weekdate,time,temp,Temp,weekday;
-    TextView textView,textView1,textView2;
-    String string;
+    TextView textView,textView1,textView2,Prompt;
+    String string,WEEK,Tem,Air_level,Win,Win_Speed,prompt,Wea;
     ListView listView;
-    List<Map<String, Object>> Week;
-    String WEEK;
-    String Tem;
-    int i,k=0;
-    String Air_level;
+    List<Map<String, Object>> Week;;
+    int i,k=0,Humidity,Air;
     RecyclerView recyclerView;
     int hour=8;
-    @Override
+    ImageText tu1,tu2,tu3;
+    int[] images;
+        @Override
     public boolean onContextItemSelected(MenuItem item) {
         return super.onContextItemSelected(item);
     }
@@ -76,23 +76,23 @@ public class TianQiFragment extends Fragment {
         weekday = new String[6];
         temp = new String[6];
         Week = new ArrayList<>();
-
         time=new String[8];
         Temp=new String[8];
-
-
+        images=new int[8];
         lists = new ArrayList<>();
-
         recyclerView = view.findViewById(R.id.hours);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
         recyclerView.setLayoutManager(layout);
         listView = view.findViewById(R.id.days);
+        tu1=view.findViewById(R.id.tu1);
+        tu2=view.findViewById(R.id.tu2);
+        tu3=view.findViewById(R.id.tu3);
+        Prompt=view.findViewById(R.id.prompt);
         textView=view.findViewById(R.id.Air);
         textView1=view.findViewById(R.id.temp);
         textView2=view.findViewById(R.id.time);
-
-        ImageText imageText = (ImageText) view.findViewById(R.id.tu1);
+        final ImageText imageText = (ImageText) view.findViewById(R.id.tu1);
         ImageText imageText2 = (ImageText) view.findViewById(R.id.tu2);
         ImageText imageText3 = (ImageText) view.findViewById(R.id.tu3);
         imageText.setImageResource(R.drawable.ic_launcher_foreground);
@@ -104,8 +104,6 @@ public class TianQiFragment extends Fragment {
         imageText3.setImageResource(R.drawable.ic_launcher_foreground);
         imageText3.setText("测试");
         imageText3.setTextSize(10);
-
-
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
                 .url("https://www.tianqiapi.com/api/?version=v1")
@@ -117,13 +115,11 @@ public class TianQiFragment extends Fragment {
                 Log.d("tag", "请求失败");
             }
 
-            //
-//        @Override
+            @Override
             public void onResponse(Call call, final Response response) throws IOException {
                 string = response.body().string();
                 Weather_TianQijson weather = new Weather_TianQijson();
                 JSONObject jsonObject = null;
-
                 try {
                     jsonObject = new JSONObject(string);
                     int cityid = jsonObject.optInt("cityid");
@@ -141,7 +137,7 @@ public class TianQiFragment extends Fragment {
                     weather.setCountryEn(countryEn);
                     List<Weather_TianQijson.Allday> datas = new ArrayList<>();
                     weather.setData(datas);
-                    String[] ti = new String[]{"cityid", "update_time", "city", "cityEn", "country", "countryEn"};
+//                    String[] ti = new String[]{"cityid", "update_time", "city", "cityEn", "country", "countryEn"};
                     for (int i = 0; i < data.length(); i++) {
                         JSONObject jsonObject1 = data.getJSONObject(i);
                         String day = jsonObject1.optString("day");
@@ -181,6 +177,11 @@ public class TianQiFragment extends Fragment {
                             WEEK=week;
                             Tem = tem2 + "~" + tem1;
                             Air_level = air_level;
+                            Humidity=humidity;
+                            Air=air;
+                            Win=win;
+                            Win_Speed=win_speed;
+                            prompt=air_tips;
                         } else {
                             weekdate[k]=day;
                             weekday[k]=week;
@@ -212,7 +213,15 @@ public class TianQiFragment extends Fragment {
                                     }
                                 time[j] = day1;
                                 Temp[j] = tem3;
-                                    hour=hour+3;
+                                hour=hour+3;
+                                Wea=wea;
+                                if (Wea.equals("多云")){
+                                    images[j]=R.mipmap.duoyun;
+                                }else if (Wea.equals("晴")){
+                                    images[j]=R.mipmap.qing;
+                                }else if (Wea.equals("小雨")){
+                                    images[j]=R.mipmap.xiaoyu;
+                                }
 
                             }
                         }
@@ -231,7 +240,6 @@ public class TianQiFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -239,7 +247,7 @@ public class TianQiFragment extends Fragment {
                         textView1.setText(Tem);
                         textView.setText("空气  "+Air_level);
                         for (i = 0; i < time.length; i++) {
-                            Data list = new Data(time[i], Temp[i]);
+                            Data list = new Data(time[i],images[i], Temp[i]);
                             lists.add(list);
                         }
                         for (i = 0; i < weekdate.length; i++) {
@@ -255,6 +263,16 @@ public class TianQiFragment extends Fragment {
                         HoursAdapter madapter = new HoursAdapter(lists, getActivity());
                         recyclerView.setAdapter(madapter);
                         listView.setAdapter(adapter);
+                        tu1.setTextView("湿度");
+                        tu1.setText(""+Humidity+"%");
+                        tu1.setImageResource(R.mipmap.shui);
+                        tu2.setTextView("空气质量");
+                        tu2.setText(Air+"  "+Air_level);
+                        tu2.setImageResource(R.mipmap.kongqizhiliang);
+                        tu3.setTextView("风向和风力");
+                        tu3.setText(Win+"\n"+Win_Speed);
+                        tu3.setImageResource(R.mipmap.feng);
+                        Prompt.setText(prompt);
                     }
                 });
             };

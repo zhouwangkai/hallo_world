@@ -1,10 +1,12 @@
 package com.example.mytianqi;
 
 import android.content.Context;
+import android.media.Image;
 import android.provider.ContactsContract;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,10 +21,12 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView time;
         TextView Temp;
+        ImageView image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             Temp = (TextView) itemView.findViewById(R.id.Temp1);
             time = (TextView) itemView.findViewById(R.id.time1);
+            image=(ImageView) itemView.findViewById(R.id.image);
         }
     }
 
@@ -45,6 +49,7 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
         Data list=lists.get(position);
         holder.time.setText(list.getTime());
         holder.Temp.setText(list.getTemp());
+        holder.image.setImageResource(list.image);
     }
 
     @Override

@@ -42,6 +42,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/air"
+                android:id="@+id/Air"
                 android:text="空气  优"
                 android:textSize="30dp" />
 
@@ -61,8 +62,10 @@
             android:layout_height="wrap_content"
             android:layout_alignBottom="@id/time"
             android:layout_alignParentRight="true"
+            android:id="@+id/temp"
             android:text="25~32"
-            android:textSize="20dp" />
+            android:textSize="20dp"
+            tools:ignore="InvalidId" />
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -8,6 +8,7 @@ import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
@@ -31,6 +32,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
+import java.sql.Time;
 import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,53 +53,45 @@ import static android.view.View.*;
 
 public class TianQiFragment extends Fragment {
     List<Data> lists;
-    String[] time;
-    String[] Temp;
-    String[] day;
-    String[] weekday;
-    String[] temp;
-    int i;
-    TextView textView;
+    String[] weekdate,time,temp,Temp,weekday;
+    TextView textView,textView1,textView2;
     String string;
     ListView listView;
     List<Map<String, Object>> Week;
     String WEEK;
-
+    String Tem;
+    int i,k=0;
+    String Air_level;
+    RecyclerView recyclerView;
+    int hour=8;
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        return super.onContextItemSelected(item);
+    }
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.tianqi_fragment, container, false);
-        time = new String[]{"1点", "3点"};
-        Temp = new String[]{"10", "13"};
-        day = new String[]{"8/8", "8/9"};
-        weekday = new String[]{"周四", "周五"};
-        temp = new String[]{"26~32", "27~32"};
+        weekdate = new String[6];
+        weekday = new String[6];
+        temp = new String[6];
         Week = new ArrayList<>();
-        for (i = 0; i < day.length; i++) {
-            Map<String, Object> week = new HashMap<>();
-            week.put("day", day[i]);
-            week.put("weekday", weekday[i]);
-            week.put("temp", temp[i]);
-            Week.add(week);
-        }
-        SimpleAdapter adapter = new SimpleAdapter(getActivity(), Week, R.layout.days_main,
-                new String[]{"day", "weekday", "temp"}
-                , new int[]{R.id.day, R.id.week, R.id.temp});
+
+        time=new String[8];
+        Temp=new String[8];
+
 
         lists = new ArrayList<>();
-        for (i = 0; i < time.length; i++) {
-            Data list = new Data(time[i], Temp[i]);
-            lists.add(list);
-        }
-        RecyclerView recyclerView = view.findViewById(R.id.hours);
+
+        recyclerView = view.findViewById(R.id.hours);
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
         recyclerView.setLayoutManager(layout);
-        HoursAdapter madapter = new HoursAdapter(lists, getActivity());
-        recyclerView.setAdapter(madapter);
-        ListView listView = view.findViewById(R.id.days);
-        textView=view.findViewById(R.id.time);
-        listView.setAdapter(adapter);
+        listView = view.findViewById(R.id.days);
+        textView=view.findViewById(R.id.Air);
+        textView1=view.findViewById(R.id.temp);
+        textView2=view.findViewById(R.id.time);
+
         ImageText imageText = (ImageText) view.findViewById(R.id.tu1);
         ImageText imageText2 = (ImageText) view.findViewById(R.id.tu2);
         ImageText imageText3 = (ImageText) view.findViewById(R.id.tu3);
@@ -183,12 +177,15 @@ public class TianQiFragment extends Fragment {
                         allday.setWin_speed(win_speed);
                         List<Weather_TianQijson.Hours> hoursList = new ArrayList<>();
                         List<Weather_TianQijson.Index> indexList = new ArrayList<>();
-                        datas.add(allday);
-                        allday.setHours(hoursList);
-                        allday.setIndex(indexList);
-                        if (i==0){
+                        if (i==0) {
                             WEEK=week;
-
+                            Tem = tem2 + "~" + tem1;
+                            Air_level = air_level;
+                        } else {
+                            weekdate[k]=day;
+                            weekday[k]=week;
+                            temp[k]=tem2+"~"+tem1;
+                            k++;
                         }
                         for (int j = 0; j < hours.length(); j++) {
                             JSONObject jsonObject2 = hours.getJSONObject(j);
@@ -204,6 +201,20 @@ public class TianQiFragment extends Fragment {
                             hours1.setWin(win1);
                             hours1.setWin_speed(win_speed1);
                             hoursList.add(hours1);
+                            if (i==0) {
+                                    if (hour<10){
+                                       day1="0"+hour+"时";
+                                    }else{
+                                       day1=hour+"时";
+                                    }
+                                    if (hour>=24){
+                                        hour=hour-24;
+                                    }
+                                time[j] = day1;
+                                Temp[j] = tem3;
+                                    hour=hour+3;
+
+                            }
                         }
                         for (int j = 0; j < index.length(); j++) {
                             JSONObject jsonObject2 = index.getJSONObject(j);
@@ -224,7 +235,26 @@ public class TianQiFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        textView.setText("今天"+"   "+WEEK);
+                        textView2.setText("今天   "+WEEK);
+                        textView1.setText(Tem);
+                        textView.setText("空气  "+Air_level);
+                        for (i = 0; i < time.length; i++) {
+                            Data list = new Data(time[i], Temp[i]);
+                            lists.add(list);
+                        }
+                        for (i = 0; i < weekdate.length; i++) {
+                            Map<String, Object> week = new HashMap<>();
+                            week.put("date", weekdate[i]);
+                            week.put("weekday", weekday[i]);
+                            week.put("temp", temp[i]);
+                            Week.add(week);
+                        }
+                        SimpleAdapter adapter = new SimpleAdapter(getActivity(), Week, R.layout.days_main,
+                                new String[]{"date", "weekday", "temp"}
+                                , new int[]{R.id.day, R.id.week, R.id.temp});
+                        HoursAdapter madapter = new HoursAdapter(lists, getActivity());
+                        recyclerView.setAdapter(madapter);
+                        listView.setAdapter(adapter);
                     }
                 });
             };

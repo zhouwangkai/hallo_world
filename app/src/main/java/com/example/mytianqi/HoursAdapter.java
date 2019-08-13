@@ -20,13 +20,13 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
     private List<Data> lists;
     public class ViewHolder extends RecyclerView.ViewHolder {
         TextView time;
-        TextView Temp;
+        TextView temp;
         ImageView image;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            Temp = (TextView) itemView.findViewById(R.id.Temp1);
-            time = (TextView) itemView.findViewById(R.id.time1);
-            image=(ImageView) itemView.findViewById(R.id.image);
+            temp = (TextView) itemView.findViewById(R.id.tv_temp);
+            time = (TextView) itemView.findViewById(R.id.tv_time);
+            image=(ImageView) itemView.findViewById(R.id.iv_image);
         }
     }
 
@@ -48,7 +48,7 @@ public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> 
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Data list=lists.get(position);
         holder.time.setText(list.getTime());
-        holder.Temp.setText(list.getTemp());
+        holder.temp.setText(list.getTemp());
         holder.image.setImageResource(list.image);
     }
 

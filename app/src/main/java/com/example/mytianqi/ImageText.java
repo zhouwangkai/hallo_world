@@ -17,9 +17,9 @@ public class ImageText extends LinearLayout {
         super(context, attrs);
         LayoutInflater.from(context).inflate(R.layout.imagetext, this, true);
         mContext = context;
-        mImgView = (ImageView)findViewById(R.id.image);
-        mTextView = (TextView)findViewById(R.id.text);
-        textView = (TextView)findViewById(R.id.tishi);
+        mImgView = (ImageView)findViewById(R.id.img_index);
+        mTextView = (TextView)findViewById(R.id.tv_explan);
+        textView = (TextView)findViewById(R.id.tv_data);
     }
 
     /*设置图片接口*/

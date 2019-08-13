@@ -7,16 +7,16 @@
         android:layout_height="wrap_content"
         android:text="13日（后天）"
         android:textSize="20dp"
-        android:id="@+id/day"
+        android:id="@+id/tv_day"
         android:paddingLeft="10dp"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="周四"
         android:textSize="20dp"
-        android:layout_toRightOf="@+id/day"
+        android:layout_toRightOf="@+id/tv_day"
         android:paddingLeft="20dp"
-        android:id="@+id/week"/>
+        android:id="@+id/tv_week"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -24,6 +24,6 @@
         android:textSize="20dp"
         android:layout_alignParentRight="true"
         android:paddingRight="10dp"
-        android:id="@+id/temp"/>
+        android:id="@+id/tv_daytem"/>
 
 </RelativeLayout>

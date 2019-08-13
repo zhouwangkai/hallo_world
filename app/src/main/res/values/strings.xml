@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">My TianQi</string>
+    '<string name="trends_fragment_title">生活动态</string>
 </resources>

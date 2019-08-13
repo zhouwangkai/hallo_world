@@ -9,33 +9,34 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/fragment"
-        android:layout_above="@+id/bn"
+        android:id="@+id/ll_fragment"
+        android:layout_above="@+id/ll_btn"
         android:orientation="vertical">
     </LinearLayout>
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="50dp"
        android:layout_alignParentBottom="true"
-       android:id="@+id/bn"
+       android:id="@+id/ll_btn"
        >
        <ImageView
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
            android:src="@mipmap/tianqiyubao"
-           android:id="@+id/bn1"
+           android:id="@+id/iv_img1"
            android:layout_weight="1"/>
        <ImageView
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
            android:src="@mipmap/community"
-           android:id="@+id/bn2"
+           android:id="@+id/iv_img2"
            android:layout_weight="1"/>
 
        <ImageView
            android:layout_width="wrap_content"
            android:layout_height="match_parent"
            android:src="@mipmap/personal"
+           android:id="@+id/iv_img3"
            android:layout_weight="1"/>
    </LinearLayout>
 

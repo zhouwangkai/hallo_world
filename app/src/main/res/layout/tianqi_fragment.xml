@@ -1,119 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView   xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <RelativeLayout
-            android:layout_width="match_parent"
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boder">
+
+        <ImageView
+            android:id="@+id/iv_img"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/boder">
+            android:layout_alignParentRight="true"
+            android:background="@drawable/ic_launcher_background" />
 
-            <ImageView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:background="@drawable/ic_launcher_background" />
-
-            <TextView
-                android:id="@+id/Temp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="25"
-                android:textSize="60dp" />
-
-            <LinearLayout
-                android:id="@+id/air"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Temp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/right"
-                    android:text="晴"
-                    android:textSize="30dp" />
-
-                <TextView
-                    android:id="@+id/Air"
-                    android:layout_width="wrap_content"
-                    android:layout_height="54dp"
-                    android:layout_alignTop="@+id/air"
-                    android:text="空气  优"
-                    android:textSize="30dp" />
-            </LinearLayout>
-
-            <TextView
-                android:id="@+id/time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/air"
-                android:layout_marginTop="20dp"
-                android:text="今天   周一"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@id/time"
-                android:layout_alignParentRight="true"
-                android:id="@+id/temp"
-                android:text="25~32"
-                android:textSize="20dp"
-                tools:ignore="InvalidId" />
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/hours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/boder">
-        </androidx.recyclerview.widget.RecyclerView>
-
-        <ListView
-            android:id="@+id/days"
-            android:layout_width="match_parent"
-            android:layout_height="168dp"
-            android:background="@drawable/boder">
-        </ListView>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/boder">
-            <com.example.mytianqi.ImageText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:id="@+id/tu1">
-
-            </com.example.mytianqi.ImageText>
-            <com.example.mytianqi.ImageText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:id="@+id/tu2">
-            </com.example.mytianqi.ImageText>
-            <com.example.mytianqi.ImageText
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_weight="1"
-                android:id="@+id/tu3">
-            </com.example.mytianqi.ImageText>
-        </LinearLayout>
         <TextView
+            android:id="@+id/tv_nowtem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="25"
+            android:textSize="60dp"
+            tools:ignore="DuplicateIds" />
+
+        <LinearLayout
+            android:id="@+id/ll_air"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_nowtem"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_wea"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/right"
+                android:text="晴"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/tv_air"
+                android:layout_width="wrap_content"
+                android:layout_height="54dp"
+                android:layout_alignTop="@+id/air"
+                android:text="空气  优"
+                android:textSize="30dp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_air"
+            android:layout_marginTop="20dp"
+            android:text="今天   周一"
+            android:textSize="20dp"
+            tools:ignore="NotSibling" />
+
+        <TextView
+            android:id="@+id/tv_tem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/tv_time"
+            android:layout_alignParentRight="true"
+            android:text="25~32"
+            android:textSize="20dp"
+            tools:ignore="InvalidId" />
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/reycler_hours"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boder"></androidx.recyclerview.widget.RecyclerView>
+
+    <ListView
+        android:id="@+id/lv_days"
+        android:layout_width="match_parent"
+        android:layout_height="164dp"
+        android:background="@drawable/boder"></ListView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boder">
+
+        <com.example.mytianqi.ImageText
+            android:id="@+id/img_tu1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/prompt"
-            android:textSize="20dp"
-            android:background="@drawable/boder"/>
-           </LinearLayout>
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1">
+
+        </com.example.mytianqi.ImageText>
+
+        <com.example.mytianqi.ImageText
+            android:id="@+id/img_tu2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"></com.example.mytianqi.ImageText>
+
+        <com.example.mytianqi.ImageText
+            android:id="@+id/img_tu3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="1"></com.example.mytianqi.ImageText>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_point"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/boder"
+        android:textSize="20dp" />
+    </LinearLayout>
 </ScrollView>

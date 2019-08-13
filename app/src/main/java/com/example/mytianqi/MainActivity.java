@@ -20,10 +20,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bn1 = findViewById(R.id.bn1);
-        bn2 = findViewById(R.id.bn2);
+        bn1 = findViewById(R.id.iv_img1);
+        bn2 = findViewById(R.id.iv_img2);
         TianQiFragment tianqi = new TianQiFragment();
-        getSupportFragmentManager().beginTransaction().replace(R.id.fragment, tianqi).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment, tianqi).commit();
         bn1.setOnClickListener(l);
         bn2.setOnClickListener(l);
     }
@@ -34,13 +34,14 @@ public class MainActivity extends AppCompatActivity {
             FragmentTransaction ft = fm.beginTransaction();
             Fragment f = null;
             switch (view.getId()) {
-                case R.id.bn1:
+                case R.id.iv_img1:
                     f = new TianQiFragment();
                     break;
-                case R.id.bn2:
+                case R.id.iv_img2:
+                    f =new TrendsFragment();
                     break;
             }
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment,f).commit();
+            getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment,f).commit();
         }
 
     };

@@ -27,16 +27,17 @@ public class DiscussActivity extends Activity {
         user_text=findViewById(R.id.user_text);
         btn_bn1 = findViewById(R.id.btn_bn1);
         btn_bn2 = findViewById(R.id.btn_bn2);
-        text=user_text.getText().toString();
         btn_bn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Bundle data=new Bundle();
-//                data.putString("text",text);
-//                Intent intent=new Intent();
-//                intent.putExtras(data);
-                setResult(10);
+                text=user_text.getText().toString();
+                Bundle data=new Bundle();
+                data.putString("text",text);
+                Intent intent=new Intent();
+                intent.putExtras(data);
+                setResult(10,intent);
                 finish();
+
             }
         });
         btn_bn2.setOnClickListener(new View.OnClickListener() {

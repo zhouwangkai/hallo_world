@@ -11,6 +11,11 @@
             android:text="@string/trends_fragment_title"
             android:textSize="30dp"
             android:layout_centerHorizontal="true"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tv_user"
+            android:textSize="30dp"/>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"

@@ -47,24 +47,6 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1&&resultCode==10) {
-            Fragment fragment = new TrendsFragment();
-            FragmentManager fmanger = getSupportFragmentManager();
-            FragmentTransaction transaction = fmanger.beginTransaction();
-            transaction.replace(R.id.ll_fragment, fragment);
-            transaction.commit();
-        }
-        if (requestCode==1&&resultCode==11) {
-            Fragment fragment = new TrendsFragment();
-            FragmentManager fmanger = getSupportFragmentManager();
-            FragmentTransaction transaction = fmanger.beginTransaction();
-            transaction.replace(R.id.ll_fragment, fragment);
-            transaction.commit();
-        }
-    }
 }
 
 

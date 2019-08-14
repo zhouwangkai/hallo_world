@@ -9,13 +9,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/trends_fragment_title"
+            android:id="@+id/tv_title"
             android:textSize="30dp"
             android:layout_centerHorizontal="true"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/tv_user"
-            android:textSize="30dp"/>
+            android:textSize="30dp"
+            android:layout_below="@+id/tv_title"/>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"

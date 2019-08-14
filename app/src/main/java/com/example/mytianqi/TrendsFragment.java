@@ -36,12 +36,15 @@ public class TrendsFragment extends Fragment {
         });
         return view;
     }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (requestCode==1&&resultCode==10){
-//            String text= (String) getArguments().get("text");
-//            tv_user.setText(text);
-//        }
-//    }
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode==1&&resultCode==10){
+            Bundle bundle= data.getExtras();
+            String text=bundle.getString("text");
+            tv_user.setText(text);
+        }
+    }
+
+
 }

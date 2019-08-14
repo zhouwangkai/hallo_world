@@ -2,6 +2,7 @@ package com.example.mytianqi;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.media.Image;
 import android.os.Bundle;
@@ -24,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -80,28 +83,28 @@ public class TianQiFragment extends Fragment {
         weekday = new String[6];
         temp_day = new String[6];
         weeks = new ArrayList<>();
-        time=new String[8];
-        temp_today=new String[8];
-        images=new int[9];
-        hour=new int[8];
+        time = new String[8];
+        temp_today = new String[8];
+        images = new int[9];
+        hour = new int[8];
         lists = new ArrayList<>();
-        call=Calendar.getInstance();
-        tv_nowtem=view.findViewById(R.id.tv_nowtem);
+        call = Calendar.getInstance();
+        tv_nowtem = view.findViewById(R.id.tv_nowtem);
         call.setTimeZone(TimeZone.getTimeZone("GMT+8:00"));
         recyclerView = view.findViewById(R.id.reycler_hours);
-        string_time=String.valueOf(call.get(Calendar.HOUR));
+        string_time = String.valueOf(call.get(Calendar.HOUR));
         LinearLayoutManager layout = new LinearLayoutManager(getActivity());
         layout.setOrientation(LinearLayoutManager.HORIZONTAL);//设置为横向排列
         recyclerView.setLayoutManager(layout);
         lv_days = view.findViewById(R.id.lv_days);
-        iv_img=view.findViewById(R.id.iv_img);
-        img_tu1=view.findViewById(R.id.img_tu1);
-        img_tu2=view.findViewById(R.id.img_tu2);
-        img_tu3=view.findViewById(R.id.img_tu3);
-        tv_point=view.findViewById(R.id.tv_point);
-        tv_air=view.findViewById(R.id.tv_air);
-        tv_tem=view.findViewById(R.id.tv_tem);
-        tv_time=view.findViewById(R.id.tv_time);
+        iv_img = view.findViewById(R.id.iv_img);
+        img_tu1 = view.findViewById(R.id.img_tu1);
+        img_tu2 = view.findViewById(R.id.img_tu2);
+        img_tu3 = view.findViewById(R.id.img_tu3);
+        tv_point = view.findViewById(R.id.tv_point);
+        tv_air = view.findViewById(R.id.tv_air);
+        tv_tem = view.findViewById(R.id.tv_tem);
+        tv_time = view.findViewById(R.id.tv_time);
 //        final ImageText imageText = (ImageText) view.findViewById(R.id.tu1);
 //        ImageText imageText2 = (ImageText) view.findViewById(R.id.tu2);
 //        ImageText imageText3 = (ImageText) view.findViewById(R.id.tu3);
@@ -172,27 +175,27 @@ public class TianQiFragment extends Fragment {
                         allday.setWin_speed(win_speed);
                         List<Weather_TianQijson.Hours> hoursList = new ArrayList<>();
                         List<Weather_TianQijson.Index> indexList = new ArrayList<>();
-                        if (i==0) {
-                            string_now=tem;
-                            if (string_now.equals("多云")){
-                                images[8]=R.mipmap.duoyun;
-                            }else if (string_now.equals("晴")){
-                                images[8]=R.mipmap.qing;
-                            }else if (string_now.equals("小雨")){
-                                images[8]=R.mipmap.xiaoyu;
+                        if (i == 0) {
+                            string_now = tem;
+                            if (string_now.equals("多云")) {
+                                images[8] = R.mipmap.duoyun;
+                            } else if (string_now.equals("晴")) {
+                                images[8] = R.mipmap.qing;
+                            } else if (string_now.equals("小雨")) {
+                                images[8] = R.mipmap.xiaoyu;
                             }
-                            string_week=week;
+                            string_week = week;
                             string_tem = tem2 + "~" + tem1;
                             string_air_level = air_level;
-                            int_humidity=humidity;
-                            int_air=air;
-                            string_win=win;
-                            string_win_speed=win_speed;
-                            string_air_tips=air_tips;
+                            int_humidity = humidity;
+                            int_air = air;
+                            string_win = win;
+                            string_win_speed = win_speed;
+                            string_air_tips = air_tips;
                         } else {
-                            weekdate[k]=day;
-                            weekday[k]=week;
-                            temp_day[k]=tem2+"~"+tem1;
+                            weekdate[k] = day;
+                            weekday[k] = week;
+                            temp_day[k] = tem2 + "~" + tem1;
                             k++;
                         }
                         for (int j = 0; j < hours.length(); j++) {
@@ -210,7 +213,7 @@ public class TianQiFragment extends Fragment {
                             hours1.setWin_speed(win_speed1);
                             hoursList.add(hours1);
                             if (i == 0) {
-                                if (j==0) {
+                                if (j == 0) {
                                     hour[0] = 8;
                                 }
                                 if (j > 0) {
@@ -228,13 +231,13 @@ public class TianQiFragment extends Fragment {
                                 time[j] = day1;
                                 temp_today[j] = tem3;
 
-                                string_wea=wea;
-                                if (string_wea.equals("多云")){
-                                    images[j]=R.mipmap.duoyun;
-                                }else if (string_wea.equals("晴")){
-                                    images[j]=R.mipmap.qing;
-                                }else if (string_wea.equals("小雨")){
-                                    images[j]=R.mipmap.xiaoyu;
+                                string_wea = wea;
+                                if (string_wea.equals("多云")) {
+                                    images[j] = R.mipmap.duoyun;
+                                } else if (string_wea.equals("晴")) {
+                                    images[j] = R.mipmap.qing;
+                                } else if (string_wea.equals("小雨")) {
+                                    images[j] = R.mipmap.xiaoyu;
                                 }
                             }
                         }
@@ -257,10 +260,10 @@ public class TianQiFragment extends Fragment {
                     @Override
                     public void run() {
                         tv_tem.setText(string_tem);
-                        tv_time.setText("今天   "+string_week);
-                        tv_air.setText("空气  "+string_air_level);
+                        tv_time.setText("今天   " + string_week);
+                        tv_air.setText("空气  " + string_air_level);
                         for (i = 0; i < time.length; i++) {
-                            Data list = new Data(time[i],images[i], temp_today[i]);
+                            Data list = new Data(time[i], images[i], temp_today[i]);
                             lists.add(list);
                         }
                         tv_nowtem.setText(string_now);
@@ -280,18 +283,20 @@ public class TianQiFragment extends Fragment {
                         recyclerView.setAdapter(madapter);
                         lv_days.setAdapter(adapter);
                         img_tu1.setTextView("湿度");
-                        img_tu1.setText(""+int_humidity+"%");
+                        img_tu1.setText("" + int_humidity + "%");
                         img_tu1.setImageResource(R.mipmap.shui);
                         img_tu2.setTextView("空气质量");
-                        img_tu2.setText(int_air+"  "+string_air_level);
+                        img_tu2.setText(int_air + "  " + string_air_level);
                         img_tu2.setImageResource(R.mipmap.kongqizhiliang);
                         img_tu3.setTextView("风向和风力");
-                        img_tu3.setText(string_win+" "+string_win_speed);
+                        img_tu3.setText(string_win + " " + string_win_speed);
                         img_tu3.setImageResource(R.mipmap.feng);
                         tv_point.setText(string_air_tips);
                     }
                 });
-            };
+            }
+
+            ;
         });
         return view;
     }

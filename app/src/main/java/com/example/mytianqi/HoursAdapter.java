@@ -18,7 +18,7 @@ import java.util.List;
 public class HoursAdapter extends RecyclerView.Adapter<HoursAdapter.ViewHolder> {
     private Context context;
     private List<Data> lists;
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView time;
         TextView temp;
         ImageView image;

@@ -176,19 +176,12 @@ public class TianQiFragment extends Fragment {
                         List<Weather_TianQijson.Hours> hoursList = new ArrayList<>();
                         List<Weather_TianQijson.Index> indexList = new ArrayList<>();
                         if (i == 0) {
-                            string_now = tem;
-                            if (string_now.equals("多云")) {
-                                images[8] = R.mipmap.duoyun;
-                            } else if (string_now.equals("晴")) {
-                                images[8] = R.mipmap.qing;
-                            } else if (string_now.equals("小雨")) {
-                                images[8] = R.mipmap.xiaoyu;
-                            }
                             string_week = week;
                             string_tem = tem2 + "~" + tem1;
                             string_air_level = air_level;
                             int_humidity = humidity;
                             int_air = air;
+                            string_now=tem;
                             string_win = win;
                             string_win_speed = win_speed;
                             string_air_tips = air_tips;
@@ -231,7 +224,7 @@ public class TianQiFragment extends Fragment {
                                 time[j] = day1;
                                 temp_today[j] = tem3;
 
-                                string_wea = wea;
+                                string_wea = wea1;
                                 if (string_wea.equals("多云")) {
                                     images[j] = R.mipmap.duoyun;
                                 } else if (string_wea.equals("晴")) {

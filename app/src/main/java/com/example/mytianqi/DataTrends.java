@@ -1,5 +1,7 @@
 package com.example.mytianqi;
 
+import android.media.Image;
+
 public class DataTrends {
     String text;
 

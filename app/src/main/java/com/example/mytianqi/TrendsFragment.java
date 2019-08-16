@@ -3,6 +3,7 @@ package com.example.mytianqi;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -29,18 +30,30 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TrendsFragment<lv_discuss> extends Fragment {
+import javax.sql.RowSet;
+
+import static com.example.mytianqi.R.id.*;
+//implements TrendsAdapter.Callback
+public class TrendsFragment extends Fragment {
     ImageView add;
     ListView lv_discuss;
     TextView tv_user;
-    List<Map<String,Object>> datas;
+    List<DataTrends> datas;
+    SQLiteDatabase db;
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.trends_fragment, container, false);
+        db=SQLiteDatabase.openOrCreateDatabase(getActivity().getFilesDir().toString()
+                +"/my.db3",null);
+        db.execSQL("create table if not exists my_table(id integer"
+                +" primary key autoincrement,"
+                +"news_title varchar(50),"
+                +"news_data varchar(255))");
         lv_discuss = view.findViewById(R.id.lv_discuss);
         tv_user = view.findViewById(R.id.tv_user);
         datas = new ArrayList<>();
-        add = view.findViewById(R.id.iv_add);
+        add = view.findViewById(iv_add);
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -57,27 +70,20 @@ public class TrendsFragment<lv_discuss> extends Fragment {
         if (requestCode==1&&resultCode==10){
             Bundle bundle= data.getExtras();
             String text=bundle.getString("text");
-           Map<String,Object> data_trends = new HashMap<>();
-           data_trends.put("text",text);
+           DataTrends data_trends = new DataTrends();
+           data_trends.setText(text);
            datas.add(data_trends);
            if (datas.size()>1){
                for (int i=datas.size()-1;i>=1;i--){
-                   Map<String,Object> tem = null;
+                  DataTrends tem=null;
                    tem=datas.get(i);
                    datas.set(i,datas.get(i-1));
                    datas.set(i-1,tem);
                }
            }
-            SimpleAdapter adapter = new SimpleAdapter(getActivity(), datas, R.layout.trends_fragment_line,
-                    new String[]{"text"}
-                    , new int[]{R.id.tv_text});
-
+           TrendsAdapter adapter=new TrendsAdapter(getActivity(), datas);
             lv_discuss.setAdapter(adapter);
-
         }
     }
-
-
-
 
 }

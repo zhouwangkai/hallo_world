@@ -12,12 +12,6 @@
             android:id="@+id/tv_title"
             android:textSize="30dp"
             android:layout_centerHorizontal="true"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/tv_user"
-            android:textSize="30dp"
-            android:layout_below="@+id/tv_title"/>
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
@@ -26,9 +20,11 @@
             android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"/>
     </RelativeLayout>
-    <ListView
+
+        <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/lv_discuss">
     </ListView>
+
 </LinearLayout>

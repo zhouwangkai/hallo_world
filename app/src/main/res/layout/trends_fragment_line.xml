@@ -64,20 +64,53 @@
                 android:layout_height="50dp"
                 android:id="@+id/good"
                 android:src="@mipmap/zan"
-                android:layout_toLeftOf="@+id/discuss"/>
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:id="@+id/discuss"
-                android:src="@mipmap/iconfontpinglun"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="30dp"/>
+
         </RelativeLayout>
+
         <ListView
+            android:id="@+id/discuss"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/function"></ListView>
+            android:layout_below="@id/function"
+            android:layout_marginTop="28dp"></ListView>
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/discuss">
+            <TableRow>
+                <EditText
+                    android:id="@+id/et_discuss"
+                    android:layout_weight="1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="8dip"
+                    android:paddingRight="8dip"
+                    android:paddingTop="5dip"
+                    android:paddingBottom="5dip"
+                    android:singleLine="true"
+                    android:textColorHint="#AAAAAA"
+                    android:textSize="18sp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="0dip"
+                    android:imeOptions="actionNext"
+                    android:ellipsize="end"
+                    android:phoneNumber="true"  />
+
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/et_discuss"
+                    android:text="回复"
+                    android:id="@+id/reply"/>
+
+            </TableRow>
+
+        </TableLayout>
+
+
     </RelativeLayout>
 
 </LinearLayout>

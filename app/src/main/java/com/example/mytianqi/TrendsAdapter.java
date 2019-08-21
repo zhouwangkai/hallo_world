@@ -23,10 +23,14 @@ import android.widget.TextView;
 
 import androidx.fragment.app.FragmentActivity;
 
+import java.util.AbstractMap;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.zip.Inflater;
 
 public class TrendsAdapter extends BaseAdapter{
@@ -34,14 +38,17 @@ public class TrendsAdapter extends BaseAdapter{
     private LayoutInflater inflater;
     private SQLiteDatabase db;
     int j;
-    List<Map<String,Object>> datas;
+    List<List<String>> functions;
+    List<String> mapList;
+
     Context context;
 
-    public TrendsAdapter(Context context, List<DataTrends> lists,SQLiteDatabase db) {
+    public TrendsAdapter(Context context, List<DataTrends> lists,SQLiteDatabase db,List<List<String>> functions) {
         Lists = lists;
         inflater=LayoutInflater.from(context);
         this.db=db;
         this.context=context;
+        this.functions=functions;
 
     }
     public int getCount() {
@@ -57,7 +64,6 @@ public class TrendsAdapter extends BaseAdapter{
     public long getItemId(int i) {
         return i;
     }
-
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder holder = new ViewHolder();
@@ -68,12 +74,13 @@ public class TrendsAdapter extends BaseAdapter{
         holder.number=view.findViewById(R.id.number);
         holder.text.setText(Lists.get(i).getText());
         holder.listView=view.findViewById(R.id.discuss);
+        mapList=new ArrayList<>();
+        functions.add(mapList);
         holder.number.setText(Lists.get(i).getGood());
         holder.et_discuss=view.findViewById(R.id.et_discuss);
         holder.reply=view.findViewById(R.id.reply);
-        datas=new ArrayList<>();
-        final boolean[] k = {true};
 
+        final boolean[] k = {true};
         holder.good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -98,23 +105,27 @@ public class TrendsAdapter extends BaseAdapter{
         }
         });
 
-//        holder.reply.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                String m=holder.et_discuss.getText().toString();
-//                Map<String, Object> data=new HashMap<>();
-//                data.put("reply",m);
-//                datas.add(data);
-//                SimpleAdapter adapter=new SimpleAdapter(context,datas,R.layout.line_discuss,
-//                        new String[]{"reply"}
-//                        ,new int[]{R.id.textview});
-//                holder.listView.setAdapter(adapter);
-//            }
-//});
-
+        holder.reply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String m=holder.et_discuss.getText().toString();
+                mapList.add(m);
+                functions.set(i,mapList);
+                AdapterDiscuss adapter = new AdapterDiscuss(mapList,context);
+                holder.listView.setAdapter(adapter);
+            }
+        });
+        if (functions.size()!=0) {
+            mapList = functions.get(i);
+            if (mapList != null) {
+                AdapterDiscuss adapter = new AdapterDiscuss(mapList, context);
+                holder.listView.setAdapter(adapter);
+            }
+        }
         holder.good.setTag(i);
         return view;
     }
+
     public static class ViewHolder{
         ImageView good;
         TextView text,number;

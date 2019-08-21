@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,6 +45,8 @@ public class TrendsFragment extends Fragment {
     TextView tv_user;
     List<DataTrends> datas;
     SQLiteDatabase db;
+     List<List<String>> functions ;
+     List<String> function;
 
     int j = 0;
 
@@ -60,8 +63,8 @@ public class TrendsFragment extends Fragment {
                 + "news_function varchar(255))");
         lv_discuss = view.findViewById(R.id.lv_discuss);
         datas = new ArrayList<>();
-
         add = view.findViewById(iv_add);
+        functions=new ArrayList<>();;
         Cursor cursor = db.rawQuery("select * from my_table", null);
 
         if (cursor.moveToFirst()) {
@@ -76,7 +79,7 @@ public class TrendsFragment extends Fragment {
 
             } while (cursor.moveToNext());
         }
-        TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db);
+        TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db,functions);
         lv_discuss.setAdapter(adapter);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,6 +89,7 @@ public class TrendsFragment extends Fragment {
                 startActivityForResult(intent, 1);
             }
         });
+
         return view;
     }
 
@@ -109,10 +113,11 @@ public class TrendsFragment extends Fragment {
                 }
             }
             insertData(db, text);
-            TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db);
+            TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db,functions);
             lv_discuss.setAdapter(adapter);
         }
     }
+
 
     private void insertData(SQLiteDatabase db, String text) {
         db.execSQL("insert into my_table(_id,news_data,news_good,news_function)values(?,?,0,null)"

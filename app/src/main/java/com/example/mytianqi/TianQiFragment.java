@@ -250,6 +250,8 @@ public class TianQiFragment extends Fragment {
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
+
+                if(getActivity()==null) return;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -283,7 +285,7 @@ public class TianQiFragment extends Fragment {
                         img_tu2.setText(int_air + "  " + string_air_level);
                         img_tu2.setImageResource(R.mipmap.kongqizhiliang);
                         img_tu3.setTextView("风向和风力");
-                        img_tu3.setText(string_win + " " + string_win_speed);
+                        img_tu3.setText(string_win + string_win_speed +"\n" );
                         img_tu3.setImageResource(R.mipmap.feng);
                         tv_point.setText(string_air_tips);
                     }

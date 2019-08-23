@@ -60,22 +60,25 @@ import static android.view.View.*;
 
 public class TianQiFragment extends Fragment {
     List<Data> lists;
-    String[] weekdate,time,temp_day,temp_today,weekday;
-    TextView tv_air,tv_tem,tv_time,tv_point,tv_nowtem;
-    String string,string_week,string_tem,string_air_level,string_win,
-           string_win_speed,string_air_tips,string_wea,string_time,string_now;
+    String[] weekdate, time, temp_day, temp_today, weekday;
+    TextView tv_air, tv_tem, tv_time, tv_point, tv_nowtem;
+    String string, string_week, string_tem, string_air_level, string_win,
+            string_win_speed, string_air_tips, string_wea, string_time, string_now;
     ListView lv_days;
-    List<Map<String, Object>> weeks;;
-    int i,k=0,l=0,int_humidity,int_air;
+    List<Map<String, Object>> weeks;
+    ;
+    int i, k = 0, l = 0, int_humidity, int_air;
     RecyclerView recyclerView;
-    int[] hour,images;
-    ImageText img_tu1,img_tu2,img_tu3;
+    int[] hour, images;
+    ImageText img_tu1, img_tu2, img_tu3;
     Calendar call;
     ImageView iv_img;
-        @Override
+
+    @Override
     public boolean onContextItemSelected(MenuItem item) {
         return super.onContextItemSelected(item);
     }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -106,9 +109,6 @@ public class TianQiFragment extends Fragment {
         tv_air = view.findViewById(R.id.tv_air);
         tv_tem = view.findViewById(R.id.tv_tem);
         tv_time = view.findViewById(R.id.tv_time);
-//        final ImageText imageText = (ImageText) view.findViewById(R.id.tu1);
-//        ImageText imageText2 = (ImageText) view.findViewById(R.id.tu2);
-//        ImageText imageText3 = (ImageText) view.findViewById(R.id.tu3);
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
                 .url("https://www.tianqiapi.com/api/?version=v1")
@@ -182,7 +182,7 @@ public class TianQiFragment extends Fragment {
                             string_air_level = air_level;
                             int_humidity = humidity;
                             int_air = air;
-                            string_now=tem;
+                            string_now = tem;
                             string_win = win;
                             string_win_speed = win_speed;
                             string_air_tips = air_tips;
@@ -232,6 +232,8 @@ public class TianQiFragment extends Fragment {
                                     images[j] = R.mipmap.qing;
                                 } else if (string_wea.equals("小雨")) {
                                     images[j] = R.mipmap.xiaoyu;
+                                }else if (string_wea.equals("中雨")){
+                                    images[j]=R.mipmap.zhongyu;
                                 }
                             }
                         }
@@ -251,7 +253,7 @@ public class TianQiFragment extends Fragment {
                     e.printStackTrace();
                 }
 
-                if(getActivity()==null) return;
+                if (getActivity() == null) return;
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -285,7 +287,7 @@ public class TianQiFragment extends Fragment {
                         img_tu2.setText(int_air + "  " + string_air_level);
                         img_tu2.setImageResource(R.mipmap.kongqizhiliang);
                         img_tu3.setTextView("风向和风力");
-                        img_tu3.setText(string_win + string_win_speed +"\n" );
+                        img_tu3.setText(string_win + string_win_speed + "\n");
                         img_tu3.setImageResource(R.mipmap.feng);
                         tv_point.setText(string_air_tips);
                     }

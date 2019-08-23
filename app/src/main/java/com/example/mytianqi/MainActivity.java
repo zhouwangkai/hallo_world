@@ -17,17 +17,19 @@ import android.widget.ImageView;
 public class MainActivity extends AppCompatActivity {
     ImageView img1;
     ImageView img2;
-
+    ImageView img3;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         img1 = findViewById(R.id.iv_img1);
         img2 = findViewById(R.id.iv_img2);
+        img3 = findViewById(R.id.iv_img3);
         TianQiFragment tianqi = new TianQiFragment();
         getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment, tianqi).commit();
         img1.setOnClickListener(l);
         img2.setOnClickListener(l);
+        img3.setOnClickListener(l);;
     }
 
     View.OnClickListener l = new View.OnClickListener() {
@@ -42,7 +44,10 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.iv_img2:
                     f = new TrendsFragment();
                     break;
+                case R.id.iv_img3:
+                    f=new FragmentPresonal();
             }
+
             getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment, f).commit();
         }
     };

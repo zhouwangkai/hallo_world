@@ -20,24 +20,24 @@ public class DiscussActivity extends Activity {
     Button btn_bn2;
     EditText user_text;
     String text;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discuss);
-        user_text=findViewById(R.id.user_text);
+        user_text = findViewById(R.id.user_text);
         btn_bn1 = findViewById(R.id.btn_bn1);
         btn_bn2 = findViewById(R.id.btn_bn2);
         btn_bn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                text=user_text.getText().toString();
-                Bundle data=new Bundle();
-                data.putString("text",text);
-                Intent intent=new Intent();
+                text = user_text.getText().toString();
+                Bundle data = new Bundle();
+                data.putString("text", text);
+                Intent intent = new Intent();
                 intent.putExtras(data);
-                setResult(10,intent);
+                setResult(10, intent);
                 finish();
-
             }
         });
         btn_bn2.setOnClickListener(new View.OnClickListener() {

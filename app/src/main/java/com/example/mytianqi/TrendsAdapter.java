@@ -27,13 +27,14 @@ import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.zip.Inflater;
 
-public class TrendsAdapter extends BaseAdapter{
+public class TrendsAdapter extends BaseAdapter {
     private List<DataTrends> Lists;
     private LayoutInflater inflater;
     private SQLiteDatabase db;
@@ -43,14 +44,15 @@ public class TrendsAdapter extends BaseAdapter{
 
     Context context;
 
-    public TrendsAdapter(Context context, List<DataTrends> lists,SQLiteDatabase db,List<List<String>> functions) {
+    public TrendsAdapter(Context context, List<DataTrends> lists, SQLiteDatabase db, List<List<String>> functions) {
         Lists = lists;
-        inflater=LayoutInflater.from(context);
-        this.db=db;
-        this.context=context;
-        this.functions=functions;
+        inflater = LayoutInflater.from(context);
+        this.db = db;
+        this.context = context;
+        this.functions = functions;
 
     }
+
     public int getCount() {
         return Lists.size();
     }
@@ -64,58 +66,60 @@ public class TrendsAdapter extends BaseAdapter{
     public long getItemId(int i) {
         return i;
     }
+
     @Override
     public View getView(final int i, View view, ViewGroup viewGroup) {
         final ViewHolder holder = new ViewHolder();
-        view= inflater.inflate(R.layout.trends_fragment_line,null);
+        view = inflater.inflate(R.layout.trends_fragment_line, null);
         view.setTag(holder);
-        holder.good=view.findViewById(R.id.good);
-        holder.text=view.findViewById(R.id.tv_text);
-        holder.number=view.findViewById(R.id.number);
+        holder.good = view.findViewById(R.id.good);
+        holder.text = view.findViewById(R.id.tv_text);
+        holder.number = view.findViewById(R.id.number);
         holder.text.setText(Lists.get(i).getText());
-        holder.listView=view.findViewById(R.id.discuss);
-        mapList=new ArrayList<>();
+        holder.listView = view.findViewById(R.id.discuss);
+        mapList = new ArrayList<>();
         functions.add(mapList);
         holder.number.setText(Lists.get(i).getGood());
-        holder.et_discuss=view.findViewById(R.id.et_discuss);
-        holder.reply=view.findViewById(R.id.reply);
+        holder.et_discuss = view.findViewById(R.id.et_discuss);
+        holder.reply = view.findViewById(R.id.reply);
 
         final boolean[] k = {true};
         holder.good.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s= (String) holder.number.getText();
-                int a=Integer.parseInt(s);
-                if (k[0] ==true) {
+                String s = (String) holder.number.getText();
+                int a = Integer.parseInt(s);
+                if (k[0] == true) {
                     a = a + 1;
-                    int img=R.mipmap.zan1;
+                    int img = R.mipmap.zan1;
                     holder.good.setImageResource(img);
-                    k[0]=false;
+                    k[0] = false;
 
-                }else {
+                } else {
                     a = a - 1;
                     holder.good.setImageResource(R.mipmap.zan);
-                    k[0]=true;
+                    k[0] = true;
                 }
-                s=String.valueOf(a);
+                s = String.valueOf(a);
                 holder.number.setText(s);
-                ContentValues values=new ContentValues();
-                values.put("news_good",s);
-                db.execSQL("update my_table set news_good=? where _id=?",new String[]{s, String.valueOf(i)});
-        }
+                ContentValues values = new ContentValues();
+                values.put("news_good", s);
+                db.execSQL("update my_table set news_good=? where _id=?", new String[]{s, String.valueOf(Lists.size() - i - 1)});
+            }
         });
 
         holder.reply.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String m=holder.et_discuss.getText().toString();
+                String m = holder.et_discuss.getText().toString();
                 mapList.add(m);
-                functions.set(i,mapList);
-                AdapterDiscuss adapter = new AdapterDiscuss(mapList,context);
+                functions.set(i, mapList);
+                AdapterDiscuss adapter = new AdapterDiscuss(mapList, context);
                 holder.listView.setAdapter(adapter);
             }
         });
-        if (functions.size()!=0) {
+
+        if (functions.size() != 0) {
             mapList = functions.get(i);
             if (mapList != null) {
                 AdapterDiscuss adapter = new AdapterDiscuss(mapList, context);
@@ -126,15 +130,13 @@ public class TrendsAdapter extends BaseAdapter{
         return view;
     }
 
-    public static class ViewHolder{
+    public static class ViewHolder {
         ImageView good;
-        TextView text,number;
+        TextView text, number;
         EditText et_discuss;
         Button reply;
         ListView listView;
     }
-
-
 
 
 }

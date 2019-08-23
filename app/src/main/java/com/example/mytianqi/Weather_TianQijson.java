@@ -3,82 +3,83 @@ package com.example.mytianqi;
 import java.util.List;
 
 public class Weather_TianQijson {
-        private int cityid;
-        private String update_time;
-        private String city;
-        private String cityEn;
-        private String country;
-        private String countryEn;
-        private List<Allday> data;
+    private int cityid;
+    private String update_time;
+    private String city;
+    private String cityEn;
+    private String country;
+    private String countryEn;
+    private List<Allday> data;
 
-        public int getCityid() {
-            return cityid;
-        }
+    public int getCityid() {
+        return cityid;
+    }
 
-        public void setCityid(int cityid) {
-            this.cityid = cityid;
-        }
+    public void setCityid(int cityid) {
+        this.cityid = cityid;
+    }
 
-        public String getUpdate_time() {
-            return update_time;
-        }
+    public String getUpdate_time() {
+        return update_time;
+    }
 
-        public void setUpdate_time(String update_time) {
-            this.update_time = update_time;
-        }
+    public void setUpdate_time(String update_time) {
+        this.update_time = update_time;
+    }
 
-        public String getCity() {
-            return city;
-        }
+    public String getCity() {
+        return city;
+    }
 
-        public void setCity(String city) {
-            this.city = city;
-        }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-        public String getCityEn() {
-            return cityEn;
-        }
+    public String getCityEn() {
+        return cityEn;
+    }
 
-        public void setCityEn(String cityEn) {
-            this.cityEn = cityEn;
-        }
+    public void setCityEn(String cityEn) {
+        this.cityEn = cityEn;
+    }
 
-        public String getCountry() {
-            return country;
-        }
+    public String getCountry() {
+        return country;
+    }
 
-        public void setCountry(String country) {
-            this.country = country;
-        }
+    public void setCountry(String country) {
+        this.country = country;
+    }
 
-        public String getCountryEn() {
-            return countryEn;
-        }
+    public String getCountryEn() {
+        return countryEn;
+    }
 
-        public void setCountryEn(String countryEn) {
-            this.countryEn = countryEn;
-        }
+    public void setCountryEn(String countryEn) {
+        this.countryEn = countryEn;
+    }
 
-        public List<Allday> getData() {
-            return data;
-        }
+    public List<Allday> getData() {
+        return data;
+    }
 
-        public void setData(List<Allday> data) {
-            this.data = data;
-        }
+    public void setData(List<Allday> data) {
+        this.data = data;
+    }
 
-        @Override
-        public String toString() {
-            return "Weather{" +
-                    "cityid=" + cityid +
-                    ", update_time='" + update_time + '\'' +
-                    ", city='" + city + '\'' +
-                    ", cityEn='" + cityEn + '\'' +
-                    ", country='" + country + '\'' +
-                    ", countryEn='" + countryEn + '\'' +
-                    ", data=" + data +
-                    '}';
-        }
+    @Override
+    public String toString() {
+        return "Weather{" +
+                "cityid=" + cityid +
+                ", update_time='" + update_time + '\'' +
+                ", city='" + city + '\'' +
+                ", cityEn='" + cityEn + '\'' +
+                ", country='" + country + '\'' +
+                ", countryEn='" + countryEn + '\'' +
+                ", data=" + data +
+                '}';
+    }
+
     static class Allday {
         private String day;
         private String date;
@@ -336,7 +337,6 @@ public class Weather_TianQijson {
             this.desc = desc;
 
         }
-
 
 
         @Override

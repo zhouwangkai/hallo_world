@@ -45,8 +45,8 @@ public class TrendsFragment extends Fragment {
     TextView tv_user;
     List<DataTrends> datas;
     SQLiteDatabase db;
-     List<List<String>> functions ;
-     List<String> function;
+    List<List<String>> functions;
+    List<String> function;
 
     int j = 0;
 
@@ -64,7 +64,8 @@ public class TrendsFragment extends Fragment {
         lv_discuss = view.findViewById(R.id.lv_discuss);
         datas = new ArrayList<>();
         add = view.findViewById(iv_add);
-        functions=new ArrayList<>();;
+        functions = new ArrayList<>();
+        ;
         Cursor cursor = db.rawQuery("select * from my_table", null);
 
         if (cursor.moveToFirst()) {
@@ -79,7 +80,14 @@ public class TrendsFragment extends Fragment {
 
             } while (cursor.moveToNext());
         }
-        TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db,functions);
+        for (int i = 0; i < datas.size() / 2; i++) {
+            int k = datas.size() - i - 1;
+            DataTrends tem = new DataTrends();
+            tem = datas.get(i);
+            datas.set(i, datas.get(k));
+            datas.set(k, tem);
+        }
+        TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db, functions);
         lv_discuss.setAdapter(adapter);
         add.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,7 +121,7 @@ public class TrendsFragment extends Fragment {
                 }
             }
             insertData(db, text);
-            TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db,functions);
+            TrendsAdapter adapter = new TrendsAdapter(getActivity(), datas, db, functions);
             lv_discuss.setAdapter(adapter);
         }
     }
@@ -124,6 +132,7 @@ public class TrendsFragment extends Fragment {
                 , new String[]{String.valueOf(j), text});
         j++;
     }
+
     public void onDestroy() {
         super.onDestroy();
         if (db != null && db.isOpen()) {

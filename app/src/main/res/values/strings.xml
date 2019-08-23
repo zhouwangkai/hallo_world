@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">My TianQi</string>
     '<string name="trends_fragment_title">生活动态</string>
+    <string name="filter_vcode">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ</string>
+    <string name="email">0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@</string>
 </resources>

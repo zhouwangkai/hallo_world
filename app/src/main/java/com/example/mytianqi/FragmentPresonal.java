@@ -26,9 +26,9 @@ public class FragmentPresonal extends Fragment {
         land.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent=new Intent();
-                intent.setClass(getActivity(),ActivityLand.class);
-                startActivity(intent);
+                Intent intent = new Intent();
+                intent.setClass(getActivity(), ActivityLand.class);
+                startActivityForResult(intent, 1);
             }
         });
 

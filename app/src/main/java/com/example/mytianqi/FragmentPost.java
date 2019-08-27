@@ -57,11 +57,10 @@ public class FragmentPost extends Fragment {
                     int match = (int) random.nextInt(Max) % (Max - Min + 1) + Min;
                     String s = String.valueOf(match);
                     ContentValues values = new ContentValues();
-                    values.put("_id", 1);
                     values.put("news_email", number);
                     values.put("news_key", cipher);
                     values.put("news_head", s);
-                    long l = sqLiteDatabase.insert("prefoin", null, values);
+                   sqLiteDatabase.insert("prefoin", null, values);
                     point.setText("您的账号为" + s);
                     dbHelper.close();
 

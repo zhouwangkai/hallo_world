@@ -1,6 +1,8 @@
 package com.example.mytianqi;
 
 import android.app.Activity;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -13,7 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 public class ActivityLand extends AppCompatActivity {
     TextView landing;
     TextView post;
-
+SQLiteDatabase db ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -22,6 +24,7 @@ public class ActivityLand extends AppCompatActivity {
         post = findViewById(R.id.post);
         landing.setOnClickListener(l);
         post.setOnClickListener(l);
+
         FragmentLanding fragmentLanding = new FragmentLanding();
         getSupportFragmentManager().beginTransaction().replace(R.id.ll_interface, fragmentLanding).commit();
 

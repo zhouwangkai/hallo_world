@@ -1,7 +1,9 @@
 package com.example.mytianqi;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.database.sqlite.SQLiteQueryBuilder;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +17,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.util.ArrayList;
 import java.util.Map;
@@ -23,20 +27,41 @@ public class FragmentLanding extends Fragment {
     EditText et_username;
     EditText tv_passkey;
     Button btn_landing;
-//    MyDatabaseHelper db;
-
+    SQLiteDatabase db;
+    String account;
+    FragmentManager fm;
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_landing, container, false);
         et_username = view.findViewById(R.id.et_username);
         tv_passkey = view.findViewById(R.id.tv_passkey);
         btn_landing = view.findViewById(R.id.btn_landing);
-//        db = new MyDatabaseHelper(getActivity(), "prefoin.db3", null, 1);
+         fm = getFragmentManager();
+        MyDatabaseHelper  dbHelper = new MyDatabaseHelper(getActivity(), "prefoin.db3", null, 1);
+        db = dbHelper.getWritableDatabase();
+        Cursor cursor = db.query("prefoin", null, null, null, null, null, null);
         btn_landing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 String s = et_username.getText().toString();
+                String m=tv_passkey.getText().toString();
+                Cursor cursor1=db.rawQuery("select * from prefoin where news_head like ?",new String[]{s});
+                while (cursor1.moveToNext()) {
+                    String key = cursor1.getString(cursor1.getColumnIndex("news_key"));
+                    account=cursor1.getString(cursor1.getColumnIndex("news_head"));
+                    if (key.equals(m)){
+                        Log.d("tag","通过");
+                        FragmentTransaction ft = fm.beginTransaction();
+                        FragmentPresonal fp=new FragmentPresonal();
+                        Bundle bundle=new Bundle();
+                        bundle.putString("account",account);
+                        fp.setArguments(bundle);
+                        ft.addToBackStack(null);
+                        ft.commit();
+                    }
+                }
+
             }
             private SQLiteQueryBuilder getWritableDatabase() {
                 return null;

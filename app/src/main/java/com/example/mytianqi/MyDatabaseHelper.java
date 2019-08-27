@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class MyDatabaseHelper extends SQLiteOpenHelper {
     final String CREATE_TABLE_SQL =
             "create table prefoin(_id integer"
-                                   + " primary key,"
+                                   + " primary key autoincrement,"
                                     +"news_email varchar(255),"
                                     +"news_head varchar(255),"
                                     +"news_name varchar(255),"

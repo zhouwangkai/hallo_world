@@ -14,6 +14,23 @@
         <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+            <TableRow>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="用户名："
+                        android:gravity="center_vertical|right"
+                        android:layout_marginLeft="30dp"
+                        android:textSize="25dp"
+                        />
+                <EditText
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginRight="30dp"
+                    android:textSize="20dp"
+                    android:id="@+id/et_name"/>
+            </TableRow>
 
             <TableRow>
 
@@ -23,7 +40,7 @@
                     android:layout_marginLeft="30dp"
                     android:gravity="center_vertical|right"
                     android:text="邮箱："
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/et_email"
@@ -32,7 +49,7 @@
                     android:layout_marginRight="30dp"
                     android:digits="@string/email"
                     android:layout_weight="1"
-                    android:textSize="25dp" />
+                    android:textSize="20dp" />
             </TableRow>
 
             <TableRow>
@@ -41,13 +58,14 @@
                     android:layout_height="match_parent"
                     android:gravity="center_vertical|right"
                     android:text="密码："
-                    android:textSize="30dp" />
+                    android:textSize="25dp" />
 
                 <EditText
                     android:id="@+id/tv_key"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="30dp"
+                    android:textSize="20dp"
                     android:layout_weight="1"
                     android:digits="@string/filter_vcode" />
             </TableRow>

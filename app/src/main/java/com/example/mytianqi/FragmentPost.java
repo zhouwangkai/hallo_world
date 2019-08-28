@@ -31,22 +31,26 @@ public class FragmentPost extends Fragment {
     TextView point;
     SQLiteOpenHelper dbHelper;
     SQLiteDatabase sqLiteDatabase;
+    TextView name;
+    String username;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_post, container, false);
         email = view.findViewById(R.id.et_email);
+        name = view.findViewById(R.id.et_name);
         tv_key = view.findViewById(R.id.tv_key);
         btn_confirm = view.findViewById(R.id.btn_confirm);
         point = view.findViewById(R.id.point);
-        dbHelper = new MyDatabaseHelper(getActivity(), "prefoin.db3",null, 1);
+        dbHelper = new MyDatabaseHelper(getActivity(), "prefoin.db3", null, 1);
         sqLiteDatabase = dbHelper.getWritableDatabase();
         btn_confirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 number = email.getText().toString();
                 cipher = tv_key.getText().toString();
+                username = name.getText().toString();
                 Pattern p = Pattern.compile("^[a-zA-Z0-9]" +
                         "[\\w\\.-]*[a-zA-Z0-9]@[a-zA-Z0-9][\\w\\.-]*[a-zA-Z0-9]\\.[a-zA-Z][a-zA-Z\\.]*[a-zA-Z]$");
                 Matcher m = p.matcher(number);
@@ -60,7 +64,8 @@ public class FragmentPost extends Fragment {
                     values.put("news_email", number);
                     values.put("news_key", cipher);
                     values.put("news_head", s);
-                   sqLiteDatabase.insert("prefoin", null, values);
+                    values.put("news_name",username);
+                    sqLiteDatabase.insert("prefoin", null, values);
                     point.setText("您的账号为" + s);
                     dbHelper.close();
 
@@ -71,10 +76,5 @@ public class FragmentPost extends Fragment {
         });
         return view;
 
-    }
-
-    private void insertData(SQLiteDatabase db, String number, String cipher, String s) {
-        db.execSQL("insert into my_account(news_email,news_key,news_head) values(?,?,?)"
-                , new String[]{number, cipher, s});
     }
 }

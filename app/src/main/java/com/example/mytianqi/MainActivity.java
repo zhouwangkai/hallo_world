@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -18,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
     ImageView img1;
     ImageView img2;
     ImageView img3;
+    String account=null;
+    Bundle bundle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         img1.setOnClickListener(l);
         img2.setOnClickListener(l);
         img3.setOnClickListener(l);;
+//        Bundle bundle=getIntent().getExtras();
+//        if (bundle!=null){
+//            account=bundle.getString("pasoin");
+//            FragmentPresonal fp=new FragmentPresonal();
+//            getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment,fp).commit();
+//        }else {
+//            account="";
+//        }
     }
 
     View.OnClickListener l = new View.OnClickListener() {
@@ -51,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
             getSupportFragmentManager().beginTransaction().replace(R.id.ll_fragment, f).commit();
         }
     };
+
+
 
 }
 

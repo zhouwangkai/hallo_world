@@ -23,18 +23,22 @@
     <autoscroll-to-editor value="false" />
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
-    <loaded-nodes />
+    <loaded-nodes>
+      <connection connection-id="44440cb4-05db-4680-889b-39aa3d294208">
+        <schema name="main" object-types="view, table" />
+      </connection>
+    </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="d620e61a-33d5-4429-9a2c-12f8b6020351">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from prefoin]]></console>
+    <connection id="44440cb4-05db-4680-889b-39aa3d294208">
+      <console name="Connection" type="STANDARD" schema="main" session="Main">select * from prefoin</console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="d620e61a-33d5-4429-9a2c-12f8b6020351" />
+    <connection id="44440cb4-05db-4680-889b-39aa3d294208" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -59,7 +63,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="d620e61a-33d5-4429-9a2c-12f8b6020351" active="true">
+      <connection id="44440cb4-05db-4680-889b-39aa3d294208" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -74,7 +78,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="D:\1\图片\prefoin.db3" schema="main" />
+            <file path="D:\1\天气预报\prefoin.db3" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

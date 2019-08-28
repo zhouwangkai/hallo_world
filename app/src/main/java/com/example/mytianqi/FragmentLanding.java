@@ -29,7 +29,6 @@ public class FragmentLanding extends Fragment {
     Button btn_landing;
     SQLiteDatabase db;
     String account;
-    FragmentManager fm;
     @Nullable
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, @Nullable final ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -37,7 +36,6 @@ public class FragmentLanding extends Fragment {
         et_username = view.findViewById(R.id.et_username);
         tv_passkey = view.findViewById(R.id.tv_passkey);
         btn_landing = view.findViewById(R.id.btn_landing);
-         fm = getFragmentManager();
         MyDatabaseHelper  dbHelper = new MyDatabaseHelper(getActivity(), "prefoin.db3", null, 1);
         db = dbHelper.getWritableDatabase();
         Cursor cursor = db.query("prefoin", null, null, null, null, null, null);
@@ -52,13 +50,13 @@ public class FragmentLanding extends Fragment {
                     account=cursor1.getString(cursor1.getColumnIndex("news_head"));
                     if (key.equals(m)){
                         Log.d("tag","通过");
-                        FragmentTransaction ft = fm.beginTransaction();
-                        FragmentPresonal fp=new FragmentPresonal();
-                        Bundle bundle=new Bundle();
-                        bundle.putString("account",account);
-                        fp.setArguments(bundle);
-                        ft.addToBackStack(null);
-                        ft.commit();
+                        ActivityLand user=(ActivityLand)getActivity();
+                        Bundle data = new Bundle();
+                        data.putString("account", account);
+                        Intent intent = new Intent();
+                        intent.putExtras(data);
+                        user.setResult(10, intent);
+                        user.finish();
                     }
                 }
 

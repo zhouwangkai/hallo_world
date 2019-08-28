@@ -74,6 +74,7 @@ public class TianQiFragment extends Fragment {
     Calendar call;
     ImageView iv_img;
 
+
     @Override
     public boolean onContextItemSelected(MenuItem item) {
         return super.onContextItemSelected(item);
@@ -111,7 +112,7 @@ public class TianQiFragment extends Fragment {
         tv_time = view.findViewById(R.id.tv_time);
         OkHttpClient client = new OkHttpClient();//创建OkHttpClient对象
         Request request = new Request.Builder()
-                .url("https://www.tianqiapi.com/api/?version=v1")
+                .url("https://www.tianqiapi.com/api/?version=v1&appid=zhouwangkai&appsecret=1448002351")
                 .build();
         client.newCall(request).enqueue(new Callback() {
             @Override
@@ -299,15 +300,3 @@ public class TianQiFragment extends Fragment {
         return view;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
